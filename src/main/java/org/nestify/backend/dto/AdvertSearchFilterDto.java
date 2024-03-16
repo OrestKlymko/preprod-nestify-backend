@@ -19,6 +19,7 @@ public record AdvertSearchFilterDto(
 		String description,
 		List<Advantage> advantageList,
 		LocalDateTime published_at,
-		String district
+		String district,
+		int buildIdMapTiler
 ) {
 }

@@ -17,6 +17,7 @@ public class ModelMapper {
 				.description(advertModel.getDescription())
 				.advantageList(advertModel.getPropertyRealty().getAdvantageList())
 				.district(advertModel.getAddress().getDistrict())
+				.buildIdMapTiler(advertModel.getAddress().getBuildIdMapTiler())
 				.build();
 	}
 
