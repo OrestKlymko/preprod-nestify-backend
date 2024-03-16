@@ -2,7 +2,9 @@ package org.nestify.backend.service;
 
 
 import org.nestify.backend.dto.AdvertFinalPageDto;
+import org.nestify.backend.dto.AdvertMapDto;
 import org.nestify.backend.dto.AdvertSearchFilterDto;
+import org.nestify.backend.dto.PointMapDto;
 import org.nestify.backend.mapper.ModelMapper;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.PageRequest;
@@ -95,8 +97,20 @@ public class AdvertService implements IAdvertService {
 	}
 
 	@Override
+	public AdvertMapDto getAdvertOnMapById(String uuid) throws NotFoundException {
+		AdvertModel advertModel = advertRepository.findById(uuid)
+				.orElseThrow(() -> new NotFoundException(String.format("Advert with id %s not found", uuid)));
+		return ModelMapper.mapperToAdvertMapDto(advertModel);
+	}
+
+	@Override
 	public List<AdvertModel> findAll() {
 		return advertRepository.findAll();
+	}
+
+	@Override
+	public List<PointMapDto> getPointsOnPortView(double swLng, double swLat, double neLat, double neLgt) {
+		return null;
 	}
 
 

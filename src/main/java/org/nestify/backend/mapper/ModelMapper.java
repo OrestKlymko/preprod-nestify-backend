@@ -1,5 +1,6 @@
 package org.nestify.backend.mapper;
 
+import org.nestify.backend.dto.AdvertMapDto;
 import org.nestify.backend.model.AdvertModel;
 import org.nestify.backend.dto.AdvertFinalPageDto;
 import org.nestify.backend.dto.AdvertSearchFilterDto;
@@ -34,6 +35,17 @@ public class ModelMapper {
 				.city(advertModel.getAddress().getCity())
 				.district(advertModel.getAddress().getDistrict())
 				.finalUrl(advertModel.getFinalUrl())
+				.build();
+	}
+
+	public static AdvertMapDto mapperToAdvertMapDto(AdvertModel advertModel) {
+		return AdvertMapDto.builder()
+				.linkImage(advertModel.getImages().get(0))
+				.address(advertModel.getAddress().getAddressName())
+				.id(advertModel.getId())
+				.room(advertModel.getPropertyRealty().getRoom())
+				.square(advertModel.getPropertyRealty().getSquare())
+				.floor(advertModel.getPropertyRealty().getFloor())
 				.build();
 	}
 }

@@ -46,10 +46,32 @@ public class AdvertController implements IAdvertController {
 				.body(results);
 	}
 
+	@Override
+	public ResponseEntity<?> getAdvertOnMap(String id) {
+		try {
+			return ResponseEntity
+					.status(HttpStatus.OK)
+					.contentType(MediaType.APPLICATION_JSON)
+					.body(advertService.getAdvertOnMapById(id));
+		} catch (NotFoundException e) {
+			return ResponseEntity
+					.status(HttpStatus.BAD_REQUEST)
+					.body(e.getMessage());
+		}
+	}
+
+	@Override
+	public ResponseEntity<?> getAdvertsOnMap(double swLng, double swLat, double neLgt, double neLat) {
+		return ResponseEntity
+				.status(HttpStatus.OK)
+				.contentType(MediaType.APPLICATION_JSON)
+				.body(advertService.getPointsOnPortView(swLng, swLat, neLat, neLgt));
+	}
+
 
 	@Hidden
 	@GetMapping
-	public List<AdvertModel> get(){
+	public List<AdvertModel> get() {
 		return advertService.findAll();
 	}
 

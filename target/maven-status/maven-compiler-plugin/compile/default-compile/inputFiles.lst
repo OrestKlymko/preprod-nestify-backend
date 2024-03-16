@@ -5,11 +5,13 @@
 /Users/orestklymko/Desktop/backend/src/main/java/org/nestify/backend/model/Seller.java
 /Users/orestklymko/Desktop/backend/src/main/java/org/nestify/backend/controller/IAdvertController.java
 /Users/orestklymko/Desktop/backend/src/main/java/org/nestify/backend/service/IAdvertService.java
+/Users/orestklymko/Desktop/backend/src/main/java/org/nestify/backend/dto/AdvertMapDto.java
 /Users/orestklymko/Desktop/backend/src/main/java/org/nestify/backend/model/enums/AllowedStatus.java
 /Users/orestklymko/Desktop/backend/src/main/java/org/nestify/backend/repository/AdvertRepository.java
 /Users/orestklymko/Desktop/backend/src/main/java/org/nestify/backend/service/AdvertService.java
 /Users/orestklymko/Desktop/backend/src/main/java/org/nestify/backend/exceptions/NotFoundException.java
 /Users/orestklymko/Desktop/backend/src/main/java/org/nestify/backend/model/AdvertModel.java
+/Users/orestklymko/Desktop/backend/src/main/java/org/nestify/backend/dto/PointMapDto.java
 /Users/orestklymko/Desktop/backend/src/main/java/org/nestify/backend/model/Address.java
 /Users/orestklymko/Desktop/backend/src/main/java/org/nestify/backend/model/PropertyRealty.java
 /Users/orestklymko/Desktop/backend/src/main/java/org/nestify/backend/dto/AdvertSearchFilterDto.java

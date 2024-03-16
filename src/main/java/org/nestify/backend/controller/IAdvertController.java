@@ -18,11 +18,11 @@ import java.util.Map;
 public interface IAdvertController {
 
 	@GetMapping("/advert/{id}")
-	@Tag(name="Інфо кінцевої сторінки")
+	@Tag(name = "Інфо кінцевої сторінки")
 	ResponseEntity<?> getFinalPageAdvertById(@PathVariable String id);
 
 	@GetMapping("/search")
-	@Tag(name="Пошук по фільтру")
+	@Tag(name = "Пошук по фільтру")
 	@Parameters({
 			@Parameter(name = "priceFrom", description = "Мінімальна сума", example = "0"),
 			@Parameter(name = "priceTo", description = "Гранична сума", example = "1000000"),
@@ -39,4 +39,17 @@ public interface IAdvertController {
 	})
 	ResponseEntity<Page<AdvertSearchFilterDto>> filterSearchForm(@RequestParam Map<String, List<String>> filterParams);
 
+	@GetMapping("/map/view/{id}")
+	@Tag(name = "Дістати оголошення на карті")
+	ResponseEntity<?> getAdvertOnMap(@PathVariable String id);
+
+
+	@GetMapping("/map/view/")
+	@Tag(name = "Фільтр точок на View Port")
+	ResponseEntity<?> getAdvertsOnMap(
+			@RequestParam("sw_lng") double swLng,
+			@RequestParam("sw_lat") double swLat,
+			@RequestParam("ne_lng") double neLgt,
+			@RequestParam("ne_lat") double neLat
+	);
 }
