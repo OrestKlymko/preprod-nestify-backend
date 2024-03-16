@@ -4,3 +4,5 @@ spring:
   data:
     mongodb:
       uri: mongodb+srv://advertorikus:lKSI94DhgTAYY0br@cluster0.kmzu6yr.mongodb.net/adverts
+server:
+  port: ${PORT}
