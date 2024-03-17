@@ -12,10 +12,10 @@ import java.util.UUID;
 public class Address {
 	private int id;
 	private UUID advertId;
-	private int buildIdMapTiler;
+	private long buildIdMapTiler;
 	private String district;
 	private String addressName;
 	private String city;
-	private float latitude;
-	private float longitude;
+	private double latitude;
+	private double longitude;
 }
