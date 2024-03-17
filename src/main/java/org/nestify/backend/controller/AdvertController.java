@@ -69,7 +69,7 @@ public class AdvertController implements IAdvertController {
 	}
 
 
-	@Hidden
+//	@Hidden
 	@GetMapping
 	public List<AdvertModel> get() {
 		return advertService.findAll();
