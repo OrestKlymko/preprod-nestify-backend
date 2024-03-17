@@ -110,7 +110,15 @@ public class AdvertService implements IAdvertService {
 
 	@Override
 	public List<PointMapDto> getPointsOnPortView(double swLng, double swLat, double neLat, double neLgt) {
-		return null;
+		Query query = new Query();
+		query.addCriteria(Criteria.where("address.latitude").gte(swLat).lte(neLat))
+				.addCriteria(Criteria.where("address.longitude").gte(swLng).lte(neLgt));
+
+		return mongoTemplate
+				.find(query, AdvertModel.class)
+				.stream()
+				.map(ModelMapper::mapToPointMapDto)
+				.toList();
 	}
 
 
