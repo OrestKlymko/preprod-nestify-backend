@@ -20,6 +20,7 @@ public record AdvertSearchFilterDto(
 		List<Advantage> advantageList,
 		LocalDateTime published_at,
 		String district,
-		long buildIdMapTiler
+		long buildIdMapTiler,
+		String advertImage
 ) {
 }

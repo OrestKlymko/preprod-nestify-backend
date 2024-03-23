@@ -14,6 +14,7 @@ public class ModelMapper {
 				.price(advertModel.getPropertyRealty().getTotalPrice())
 				.address(advertModel.getAddress().getAddressName())
 				.room(advertModel.getPropertyRealty().getRoom())
+				.advertImage(!advertModel.getImages().isEmpty() ? advertModel.getImages().get(0) : null)
 				.published_at(advertModel.getPublishedAt())
 				.square(advertModel.getPropertyRealty().getSquare())
 				.description(advertModel.getDescription())
@@ -50,7 +51,7 @@ public class ModelMapper {
 				.build();
 	}
 
-	public static PointMapDto mapToPointMapDto(AdvertModel advertModel){
-		return new PointMapDto(advertModel.getId(),advertModel.getAddress().getBuildIdMapTiler());
+	public static PointMapDto mapToPointMapDto(AdvertModel advertModel) {
+		return new PointMapDto(advertModel.getId(), advertModel.getAddress().getBuildIdMapTiler());
 	}
 }
