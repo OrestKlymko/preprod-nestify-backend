@@ -1,6 +1,7 @@
 package org.nestify.backend.service;
 
 
+import lombok.extern.slf4j.Slf4j;
 import org.nestify.backend.dto.AdvertFinalPageDto;
 import org.nestify.backend.dto.AdvertMapDto;
 import org.nestify.backend.dto.AdvertSearchFilterDto;
@@ -22,6 +23,7 @@ import java.util.stream.Collectors;
 
 @Service
 @AllArgsConstructor
+@Slf4j
 public class AdvertService implements IAdvertService {
 	private final AdvertRepository advertRepository;
 	private final MongoTemplate mongoTemplate;
@@ -37,8 +39,8 @@ public class AdvertService implements IAdvertService {
 	public PageImpl<AdvertSearchFilterDto> filterSearchForm(Map<String, List<String>> urlParameters) {
 
 		Query query = new Query();
-		int priceFrom = 0;
-		int priceTo = Integer.MAX_VALUE;
+		long priceFrom = 0;
+		long priceTo = Long.MAX_VALUE;
 		for (Map.Entry<String, List<String>> parameter : urlParameters.entrySet()) {
 			switch (parameter.getKey()) {
 				case "city":
@@ -48,8 +50,10 @@ public class AdvertService implements IAdvertService {
 					query.addCriteria(Criteria.where("address.addressName").regex(String.valueOf(parameter.getValue()), "i"));
 					break;
 				case "rooms":
-					String[] split = String.valueOf(parameter.getValue()).split(",");
-					List<Integer> list = Arrays.stream(split).map(Integer::parseInt).toList();
+					List<Integer> list = Arrays.stream(String.valueOf(parameter.getValue()).split(","))
+							.map(Integer::parseInt)
+							.collect(Collectors.toList());
+
 					query.addCriteria(Criteria.where("propertyRealty.room").in(list));
 					break;
 				case "districts":
@@ -60,10 +64,10 @@ public class AdvertService implements IAdvertService {
 					query.addCriteria(new Criteria().orOperator(districtCriterias.toArray(new Criteria[0])));
 					break;
 				case "priceFrom":
-					priceFrom = Integer.parseInt(String.valueOf(parameter.getValue()));
+					priceFrom = Long.parseLong(String.valueOf(parameter.getValue()));
 					break;
 				case "priceTo":
-					priceTo = Integer.parseInt(String.valueOf(parameter.getValue()));
+					priceTo = Long.parseLong(String.valueOf(parameter.getValue()));
 					break;
 				case "typeOwner":
 					query.addCriteria(Criteria.where("seller.typeOwner").is(String.valueOf(parameter.getValue())));
@@ -72,15 +76,16 @@ public class AdvertService implements IAdvertService {
 					query.addCriteria(Criteria.where("propertyRealty.withKids").is(String.valueOf(parameter.getValue())));
 					break;
 				case "withPets":
-					query.addCriteria(Criteria.where("propertyRealty.withPets").is(String.valueOf(parameter.getValue())));
+					query.addCriteria(Criteria.where("propertyRealty.withPets").is(parameter.getValue()));
 					break;
 				case "typeRealty":
-					query.addCriteria(Criteria.where("propertyRealty.typeRealty").is(String.valueOf(parameter.getValue())));
+					query.addCriteria(Criteria.where("typeRealty").is(parameter.getValue()));
 					break;
 			}
 		}
 
 		query.addCriteria(Criteria.where("propertyRealty.totalPrice").gte(priceFrom).lte(priceTo));
+
 
 		String offset = String.valueOf(urlParameters.get("offset"));
 		String limit = String.valueOf(urlParameters.get("limit"));
@@ -92,7 +97,7 @@ public class AdvertService implements IAdvertService {
 				.stream()
 				.map(ModelMapper::mapperToAdvertSearchFilterDto)
 				.collect(Collectors.toList());
-
+		System.out.println("adverts.size() = " + adverts.size());
 		return new PageImpl<>(adverts, pageRequest, total);
 	}
 
