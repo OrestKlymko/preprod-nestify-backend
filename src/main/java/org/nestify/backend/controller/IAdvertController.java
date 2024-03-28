@@ -34,7 +34,7 @@ public interface IAdvertController {
 					@Schema(implementation = AdvertFinalPageDto.class))})
 			}
 	)
-	ResponseEntity<?> getFinalPageAdvertById(@PathVariable String id);
+	ResponseEntity<?> getFinalPageAdvertById(@PathVariable("id") String id);
 
 	@GetMapping("/search")
 	@Tag(name = "Пошук по фільтру")
@@ -62,7 +62,7 @@ public interface IAdvertController {
 					@Schema(implementation = AdvertMapDto.class))})
 			}
 	)
-	ResponseEntity<?> getAdvertOnMap(@PathVariable String id);
+	ResponseEntity<?> getAdvertOnMap(@PathVariable("id") String id);
 
 
 	@GetMapping("/map/view/")

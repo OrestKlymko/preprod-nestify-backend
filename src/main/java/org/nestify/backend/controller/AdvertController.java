@@ -26,6 +26,7 @@ public class AdvertController implements IAdvertController {
 
 	@Override
 	public ResponseEntity<?> getFinalPageAdvertById(String uuid) {
+		System.out.println("uuid = " + uuid);
 		try {
 			return ResponseEntity
 					.status(HttpStatus.OK)
